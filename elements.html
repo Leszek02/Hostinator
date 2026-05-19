@@ -1,0 +1,480 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Developer Resources — Veltrix</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo"><strong>Veltrix</strong> <span>Software</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="landing.html">Services</a></li>
+							<li><a href="generic.html">About</a></li>
+							<li><a href="elements.html">Resources</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="#contact" class="button primary fit">Get a Quote</a></li>
+							<li><a href="generic.html" class="button fit">About Us</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main" class="alt">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h1>Developer Resources</h1>
+									</header>
+
+									<!-- Overview -->
+										<h2 id="content">Technical Documentation</h2>
+										<p>This page contains reference material for teams integrating Veltrix-managed infrastructure into their own systems. Our platform exposes a REST API for provisioning, monitoring, and configuration — all authenticated via short-lived tokens issued by our identity service. The examples below use <code>curl</code> but any HTTP client will work. SDKs for Python, Go, and TypeScript are available on our <a href="#">GitHub organization</a>.</p>
+										<div class="row">
+											<div class="col-6 col-12-small">
+												<h3>Authentication</h3>
+												<p>All API calls require a Bearer token obtained from the <code>/auth/token</code> endpoint. Tokens are valid for 3600 seconds. Pass your <code>client_id</code> and <code>client_secret</code> in the request body. Never expose credentials in client-side code or commit them to version control — use environment variables or a secrets manager such as AWS Secrets Manager or HashiCorp Vault.</p>
+											</div>
+											<div class="col-6 col-12-small">
+												<h3>Rate Limits</h3>
+												<p>The API enforces per-account rate limits to ensure fair usage. Standard accounts are limited to 120 requests per minute across all endpoints. Enterprise accounts have higher limits configured at the time of contract. When you hit a rate limit you will receive a <code>429 Too Many Requests</code> response with a <code>Retry-After</code> header indicating when you can resume requests.</p>
+											</div>
+											<!-- Break -->
+											<div class="col-4 col-12-medium">
+												<h3>Environments</h3>
+												<p>We maintain three environments: <strong>production</strong> at <code>api.veltrix.io</code>, <strong>staging</strong> at <code>api-staging.veltrix.io</code>, and <strong>sandbox</strong> at <code>api-sandbox.veltrix.io</code>. The sandbox uses identical API contracts but returns simulated data and does not incur charges. Use it freely for integration testing.</p>
+											</div>
+											<div class="col-4 col-12-medium">
+												<h3>Versioning</h3>
+												<p>The current stable version is <strong>v2</strong>. Pass the version in the URL path: <code>/v2/resources</code>. Version 1 will reach end-of-life on <strong>31 March 2025</strong> and will stop accepting requests at that point. Migration guides from v1 to v2 are available in the changelog. Breaking changes are never introduced within a major version.</p>
+											</div>
+											<div class="col-4 col-12-medium">
+												<h3>Webhooks</h3>
+												<p>Subscribe to real-time events by registering a webhook endpoint in your account dashboard. Events are delivered as signed JSON payloads over HTTPS. Verify the <code>X-Veltrix-Signature</code> header on each request using your webhook secret to protect against spoofed events. Undeliverable webhooks are retried with exponential backoff for up to 24 hours.</p>
+											</div>
+										</div>
+
+									<hr class="major" />
+
+									<!-- Technical details -->
+										<h2 id="elements">Service Plans &amp; Limits</h2>
+										<div class="row gtr-200">
+											<div class="col-6 col-12-medium">
+
+												<!-- Text -->
+													<h3>Support Tiers</h3>
+													<p>All plans include <b>99.9% uptime SLA</b> on managed infrastructure. Response time commitments vary by tier. <strong>Enterprise</strong> clients receive a dedicated Slack channel with a named support engineer and a two-hour initial response guarantee. Standard clients use our ticketing system with a next-business-day response target. <em>Critical</em> incidents (P1) are escalated immediately regardless of plan.</p>
+													<hr />
+													<h2>Pricing</h2>
+													<h3>Managed Compute</h3>
+													<h4>Add-ons &amp; Extensions</h4>
+													<hr />
+													<p>Pricing is denominated in USD and billed monthly in arrears. Annual prepayment is available at a 15% discount. All prices shown exclude applicable taxes. Clients in the European Union will be charged VAT at their applicable rate unless a valid VAT number is provided at account creation.</p>
+
+												<!-- Lists -->
+													<h3>What's Included</h3>
+													<div class="row">
+														<div class="col-6 col-12-small">
+
+															<h4>All Plans</h4>
+															<ul>
+																<li>99.9% uptime SLA</li>
+																<li>Automated daily backups</li>
+																<li>DDoS mitigation</li>
+															</ul>
+
+															<h4>Enterprise Only</h4>
+															<ul class="alt">
+																<li>Dedicated support engineer</li>
+																<li>Custom SLA negotiation</li>
+																<li>On-site workshops (2×/year)</li>
+															</ul>
+
+														</div>
+														<div class="col-6 col-12-small">
+
+															<h4>Setup Steps</h4>
+															<ol>
+																<li>Create your account</li>
+																<li>Verify email address</li>
+																<li>Add payment method</li>
+																<li>Generate API credentials</li>
+																<li>Run the onboarding wizard</li>
+																<li>Deploy your first service</li>
+															</ol>
+
+															<h4>Contact Us</h4>
+															<ul class="icons">
+																<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+																<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+																<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+															</ul>
+
+														</div>
+													</div>
+													<h4>Glossary</h4>
+													<dl>
+														<dt>Compute Unit (CU)</dt>
+														<dd>
+															<p>The base billing unit for managed compute resources. One CU corresponds to 1 vCPU and 2 GB of RAM running continuously for one hour. Fractional CUs are rounded up to the nearest 0.1 at the end of each billing period.</p>
+														</dd>
+														<dt>Availability Zone (AZ)</dt>
+														<dd>
+															<p>An isolated data center within a cloud region. Distributing workloads across multiple AZs provides fault tolerance. Multi-AZ deployment is automatically enabled for Enterprise plans and available as an add-on for Standard plans.</p>
+														</dd>
+														<dt>Egress</dt>
+														<dd>
+															<p>Data transferred out of the Veltrix platform to the public internet or to external cloud providers. Intra-region traffic between your own services is not charged. Egress pricing varies by destination region and is listed in the full pricing table in your account dashboard.</p>
+														</dd>
+													</dl>
+
+													<h4>Quick Actions</h4>
+													<ul class="actions">
+														<li><a href="#" class="button primary">Open Dashboard</a></li>
+														<li><a href="#" class="button">View Docs</a></li>
+													</ul>
+													<ul class="actions small">
+														<li><a href="#" class="button primary small">API Reference</a></li>
+														<li><a href="#" class="button small">Changelog</a></li>
+													</ul>
+
+													<h4>Pagination Example</h4>
+													<ul class="pagination">
+														<li><span class="button small disabled">Prev</span></li>
+														<li><a href="#" class="page active">1</a></li>
+														<li><a href="#" class="page">2</a></li>
+														<li><a href="#" class="page">3</a></li>
+														<li><span>&hellip;</span></li>
+														<li><a href="#" class="page">8</a></li>
+														<li><a href="#" class="page">9</a></li>
+														<li><a href="#" class="page">10</a></li>
+														<li><a href="#" class="button small">Next</a></li>
+													</ul>
+
+												<!-- Blockquote -->
+													<h3>Client Feedback</h3>
+													<blockquote>Veltrix cut our infrastructure costs by 28% in the first quarter after migration and our p99 latency dropped from 1.4 seconds to under 300 milliseconds. More importantly, the team genuinely understood our domain — they weren't just moving servers around.</blockquote>
+
+												<!-- Table -->
+													<h3>Standard Pricing Table</h3>
+
+													<h4>Managed Compute Plans</h4>
+													<div class="table-wrapper">
+														<table>
+															<thead>
+																<tr>
+																	<th>Plan</th>
+																	<th>Included CUs / month</th>
+																	<th>Price (USD/mo)</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>Starter</td>
+																	<td>100 CUs, 500 GB storage</td>
+																	<td>149.00</td>
+																</tr>
+																<tr>
+																	<td>Growth</td>
+																	<td>500 CUs, 2 TB storage</td>
+																	<td>549.00</td>
+																</tr>
+																<tr>
+																	<td>Scale</td>
+																	<td>2,000 CUs, 10 TB storage</td>
+																	<td>1,899.00</td>
+																</tr>
+																<tr>
+																	<td>Enterprise</td>
+																	<td>Custom allocation</td>
+																	<td>Contact us</td>
+																</tr>
+																<tr>
+																	<td>Overage</td>
+																	<td>Per additional CU</td>
+																	<td>0.09</td>
+																</tr>
+															</tbody>
+															<tfoot>
+																<tr>
+																	<td colspan="2">Annual discount (prepaid)</td>
+																	<td>−15%</td>
+																</tr>
+															</tfoot>
+														</table>
+													</div>
+
+													<h4>Add-on Services</h4>
+													<div class="table-wrapper">
+														<table class="alt">
+															<thead>
+																<tr>
+																	<th>Add-on</th>
+																	<th>Description</th>
+																	<th>Price (USD/mo)</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>Multi-AZ</td>
+																	<td>Cross-zone redundancy for Standard plans</td>
+																	<td>89.00</td>
+																</tr>
+																<tr>
+																	<td>Advanced Monitoring</td>
+																	<td>Custom dashboards, alerting, 12-month retention</td>
+																	<td>59.00</td>
+																</tr>
+																<tr>
+																	<td>Managed DB</td>
+																	<td>PostgreSQL or MySQL, automated failover</td>
+																	<td>129.00</td>
+																</tr>
+																<tr>
+																	<td>WAF</td>
+																	<td>Web Application Firewall with OWASP ruleset</td>
+																	<td>49.00</td>
+																</tr>
+																<tr>
+																	<td>Premium Support</td>
+																	<td>2-hour SLA, dedicated engineer</td>
+																	<td>299.00</td>
+																</tr>
+															</tbody>
+															<tfoot>
+																<tr>
+																	<td colspan="2"></td>
+																	<td>Per add-on</td>
+																</tr>
+															</tfoot>
+														</table>
+													</div>
+
+											</div>
+											<div class="col-6 col-12-medium">
+
+												<!-- Buttons -->
+													<h3>Dashboard Actions</h3>
+													<ul class="actions">
+														<li><a href="#" class="button primary">Deploy Service</a></li>
+														<li><a href="#" class="button">View Logs</a></li>
+													</ul>
+													<ul class="actions fit">
+														<li><a href="#" class="button primary fit">Scale Up</a></li>
+														<li><a href="#" class="button fit">Scale Down</a></li>
+													</ul>
+													<ul class="actions">
+														<li><a href="#" class="button primary icon solid fa-search">Search Logs</a></li>
+														<li><a href="#" class="button icon solid fa-download">Export</a></li>
+													</ul>
+
+												<!-- Form -->
+													<h3>Contact Support</h3>
+
+													<form method="post" action="#">
+														<div class="row gtr-uniform">
+															<div class="col-6 col-12-xsmall">
+																<input type="text" name="demo-name" id="demo-name" value="" placeholder="Your name" />
+															</div>
+															<div class="col-6 col-12-xsmall">
+																<input type="email" name="demo-email" id="demo-email" value="" placeholder="Work email" />
+															</div>
+															<!-- Break -->
+															<div class="col-12">
+																<select name="demo-category" id="demo-category">
+																	<option value="">- Issue category -</option>
+																	<option value="1">Billing &amp; Invoicing</option>
+																	<option value="2">API / Integration</option>
+																	<option value="3">Infrastructure / Uptime</option>
+																	<option value="4">Account &amp; Access</option>
+																</select>
+															</div>
+															<!-- Break -->
+															<div class="col-4 col-12-small">
+																<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+																<label for="demo-priority-low">Low</label>
+															</div>
+															<div class="col-4 col-12-small">
+																<input type="radio" id="demo-priority-normal" name="demo-priority">
+																<label for="demo-priority-normal">Normal</label>
+															</div>
+															<div class="col-4 col-12-small">
+																<input type="radio" id="demo-priority-high" name="demo-priority">
+																<label for="demo-priority-high">High / P1</label>
+															</div>
+															<!-- Break -->
+															<div class="col-6 col-12-small">
+																<input type="checkbox" id="demo-copy" name="demo-copy">
+																<label for="demo-copy">Email me a copy</label>
+															</div>
+															<div class="col-6 col-12-small">
+																<input type="checkbox" id="demo-human" name="demo-human" checked>
+																<label for="demo-human">I am a human</label>
+															</div>
+															<!-- Break -->
+															<div class="col-12">
+																<textarea name="demo-message" id="demo-message" placeholder="Describe the issue in detail" rows="6"></textarea>
+															</div>
+															<!-- Break -->
+															<div class="col-12">
+																<ul class="actions">
+																	<li><input type="submit" value="Submit Ticket" class="primary" /></li>
+																	<li><input type="reset" value="Reset" /></li>
+																</ul>
+															</div>
+														</div>
+													</form>
+
+												<!-- Image -->
+													<h3>Infrastructure Diagram</h3>
+
+													<h4>Platform Overview</h4>
+													<span class="image fit"><img src="images/pic03.jpg" alt="" /></span>
+													<div class="box alt">
+														<div class="row gtr-50 gtr-uniform">
+															<div class="col-4"><span class="image fit"><img src="images/pic08.jpg" alt="" /></span></div>
+															<div class="col-4"><span class="image fit"><img src="images/pic09.jpg" alt="" /></span></div>
+															<div class="col-4"><span class="image fit"><img src="images/pic10.jpg" alt="" /></span></div>
+															<!-- Break -->
+															<div class="col-4"><span class="image fit"><img src="images/pic10.jpg" alt="" /></span></div>
+															<div class="col-4"><span class="image fit"><img src="images/pic08.jpg" alt="" /></span></div>
+															<div class="col-4"><span class="image fit"><img src="images/pic09.jpg" alt="" /></span></div>
+															<!-- Break -->
+															<div class="col-4"><span class="image fit"><img src="images/pic09.jpg" alt="" /></span></div>
+															<div class="col-4"><span class="image fit"><img src="images/pic10.jpg" alt="" /></span></div>
+															<div class="col-4"><span class="image fit"><img src="images/pic08.jpg" alt="" /></span></div>
+														</div>
+													</div>
+
+													<h4>Region Availability</h4>
+													<p><span class="image left"><img src="images/pic09.jpg" alt="" /></span>Veltrix currently operates in six regions: <strong>US West (San Francisco)</strong>, <strong>US East (Virginia)</strong>, <strong>EU West (Frankfurt)</strong>, <strong>EU North (Stockholm)</strong>, <strong>APAC (Singapore)</strong>, and <strong>APAC (Sydney)</strong>. Data sovereignty constraints for EU clients are handled via region-locked accounts that guarantee all data, including backups and logs, remains within the EU boundary. GDPR data processing agreements are available on request.</p>
+													<p><span class="image right"><img src="images/pic10.jpg" alt="" /></span>Each region runs at least two availability zones. Cross-region replication is available as an enterprise add-on for disaster recovery scenarios requiring geographic redundancy. Failover to a secondary region is a manual operation requiring explicit confirmation — we do not perform automatic cross-region failovers to avoid unexpected cost and compliance implications for our clients.</p>
+
+												<!-- Box -->
+													<h3>Notice</h3>
+													<div class="box">
+														<p>Scheduled maintenance windows occur on the second Tuesday of each month between 02:00 and 04:00 UTC. Clients will receive notification at least 72 hours in advance via email and in-dashboard banner. Emergency maintenance required to address active security vulnerabilities may occur outside this window with shorter notice.</p>
+													</div>
+
+												<!-- Preformatted Code -->
+													<h3>API Example</h3>
+													<pre><code>curl -X POST https://api.veltrix.io/v2/services \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "my-service",
+    "region": "eu-west-1",
+    "plan": "growth",
+    "replicas": 2
+  }'</code></pre>
+
+											</div>
+										</div>
+
+								</div>
+							</section>
+
+					</div>
+
+				<!-- Contact -->
+					<section id="contact">
+						<div class="inner">
+							<section>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<label for="name">Name</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="text" name="email" id="email" />
+										</div>
+										<div class="field">
+											<label for="message">Tell us about your project</label>
+											<textarea name="message" id="message" rows="6"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" class="primary" /></li>
+										<li><input type="reset" value="Clear" /></li>
+									</ul>
+								</form>
+							</section>
+							<section class="split">
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-envelope"></span>
+										<h3>Email</h3>
+										<a href="#">hello@veltrix.io</a>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-phone"></span>
+										<h3>Phone</h3>
+										<span>+1 (415) 823-4901</span>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-home"></span>
+										<h3>Address</h3>
+										<span>340 Pine Street, Suite 800<br />
+										San Francisco, CA 94104<br />
+										United States</span>
+									</div>
+								</section>
+							</section>
+						</div>
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; 2024 Veltrix Software Inc.</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
